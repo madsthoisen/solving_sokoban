@@ -18,21 +18,6 @@ with open("data/test_levels_x.txt", "rb") as f:
 with open("data/test_levels_y.txt", "rb") as f:
     y_vals = pickle.load(f)
 
-print(x_vals[:5])
-print(x_vals.shape) #(345567, 8, 8, 4)
-
-model = models.Sequential()
-model.add(layers.Conv2D(64, (3, 3), activation='relu',
-          input_shape=(8, 8, 4)))
-model.add(layers.Conv2D(64, (3, 3), activation='relu'))
-model.add(layers.Conv2D(64, (3, 3), activation='relu'))
-model.add(layers.Flatten())
-# model.add(layers.Dense(64, activation='relu'))
-model.add(layers.Dense(1, activation='linear'))
-model.compile(optimizer='adam', loss='mean_squared_error')                
-history = model.fit(x_vals, y_vals, epochs=50)
-
-
 def pr(st):
     types = {(0, 0, 0, 0): ' ',  # Empty square
              (1, 0, 0, 0): 'p',  # Player
@@ -51,6 +36,8 @@ def pr(st):
     return out
 
 
+model = models.load_model('model_trained')
+
 for _ in range(5):
     s = random.choice(x_vals)
     pred = model.predict(np.array([s]))
@@ -58,5 +45,4 @@ for _ in range(5):
     print(pred)
 
 
-model.save('model_trained')
 
