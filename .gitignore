@@ -1,3 +1,4 @@
 src/*.egg-info
 src/solving_sokoban/__pycache__/
-tests/__pycache__/
+**/__pycache__/
+__pycache__/
