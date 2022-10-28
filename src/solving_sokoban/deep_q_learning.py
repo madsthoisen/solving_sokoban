@@ -9,7 +9,7 @@ from collections import defaultdict, deque
 from itertools import permutations
 from tensorflow import keras
 
-from game_engine import State
+from .game_engine import State
 
 
 def agent(state_shape, action_shape):
