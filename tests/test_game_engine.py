@@ -1,8 +1,10 @@
 import pytest
 
-from solving_sokoban.classes import Box, Player, Storage, Wall
-from solving_sokoban.exceptions import IllegalStateException
-from solving_sokoban.game_engine import State
+import sys
+
+from ..src.solving_sokoban.classes import Box, Player, Storage, Wall
+from ..src.solving_sokoban.exceptions import IllegalStateException
+from ..src.solving_sokoban.game_engine import State
 
 
 @pytest.fixture

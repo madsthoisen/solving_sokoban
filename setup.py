@@ -1,5 +1,6 @@
 import setuptools
 
+
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
@@ -7,7 +8,7 @@ setuptools.setup(
     name="solving_sokoban",
     version="0.0.1",
     author="Mads Thøisen",
-    author_email="madsthoisen@gmail.com",
+    author_email="madsthoisen@users.noreply.github.com",
     description="Wrestling with Sokoban",
     long_description=long_description,
     long_description_content_type="text/markdown",
