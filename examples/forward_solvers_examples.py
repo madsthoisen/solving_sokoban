@@ -13,7 +13,7 @@ from solving_sokoban.levels import levels
 
 def solve_and_visualise(level, solver, n_epochs):
     os.system("clear")
-    solver_dic = {"q_learning": ForwardSolvers.q_learning, "deep_q_learning": ForwardSolvers.deep_q_learning}
+    solver_dic = {"q_learning": ForwardSolvers.q_learning}
 
     start_state = levels[level]
     print(start_state)
@@ -39,6 +39,6 @@ def solve_and_visualise(level, solver, n_epochs):
 
 #solve_and_visualise("level_easiest", "q_learning", 25)
 #solve_and_visualise("level_easy", "q_learning", 50)
-#solve_and_visualise("level_with_3_boxes", "q_learning", 10_000)
-solve_and_visualise("hard_human_level", "q_learning", 25_000)
+solve_and_visualise("level_with_3_boxes", "q_learning", 10_000)
+#solve_and_visualise("hard_human_level", "q_learning", 25_000)
 #solve_and_visualise("original_level_1", "q_learning")

@@ -33,6 +33,6 @@ LEGAL_SQUARES = {
 
 
 REWARDS = {"move" : -1,
-           "fill_storage": 10,
-           "unfill_storage": 10,
-           "manhattan": True}
+           "fill_storage": 100,
+           "unfill_storage": -100,
+           "manhattan": False}

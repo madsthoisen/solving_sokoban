@@ -130,7 +130,7 @@ class State:
                     self.filled_storages -= 1
                     reward += REWARDS["unfill_storage"]
         
-        return reward + old_manhattan - self.manhattan()
+        return reward + (old_manhattan - self.manhattan()) * REWARDS["manhattan"]
 
 
 

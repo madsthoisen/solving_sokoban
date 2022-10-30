@@ -171,13 +171,13 @@ levels = {
         ],
     ),
     "level_easiest": State(
-        width=6,
-        height=6,
+        width=5,
+        height=5,
         player=Player(1, 1),
         boxes=[Box(2, 2)],
         storages=[Storage(2, 3)],
         walls=[
-            Wall(i, j) for i in range(6) for j in range(6) if i in {0, 5} or j in {0, 5}
+            Wall(i, j) for i in range(5) for j in range(5) if i in {0, 4} or j in {0, 4}
         ],
     ),
 }
