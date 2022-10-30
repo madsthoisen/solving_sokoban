@@ -8,28 +8,33 @@ import tensorflow as tf
 from collections import defaultdict, deque
 from itertools import permutations
 from tensorflow import keras
+from tensorflow.keras import initializers, losses
 
 from .game_engine import State
 
 
 def agent(state_shape, action_shape):
     learning_rate = 0.001
-    init = tf.keras.initializers.HeUniform()
+    #init = initializers.Zeros()
+    init = initializers.HeUniform()
+    #loss = losses.MeanSquaredError()
+    loss = losses.Huber()
+
     model = keras.Sequential()
     model.add(keras.layers.Dense(24, input_shape=state_shape, activation='relu', kernel_initializer=init))
     model.add(keras.layers.Dense(12, activation='relu', kernel_initializer=init))
     model.add(keras.layers.Dense(action_shape, activation='linear', kernel_initializer=init))
     model.add(keras.layers.Flatten())
     model.add(keras.layers.Dense(action_shape))
-    model.compile(loss=tf.keras.losses.Huber(), optimizer=tf.keras.optimizers.Adam(lr=learning_rate), metrics=['accuracy'])
+    model.compile(loss=loss, optimizer=tf.keras.optimizers.Adam(lr=learning_rate), metrics=['accuracy'])
     return model
 
 
-def train(state, replay_memory, model, target_model, done, state_shape):
+def train(state, replay_memory, model, target_model, completed, state_shape):
     learning_rate = 0.7
     discount_factor = 0.95
 
-    MIN_REPLAY_SIZE = 128*2#1000
+    MIN_REPLAY_SIZE = 128*2
     if len(replay_memory) < MIN_REPLAY_SIZE:
         return
     batch_size = 64 * 2
@@ -41,8 +46,8 @@ def train(state, replay_memory, model, target_model, done, state_shape):
 
     X = []
     Y = []
-    for index, (observation, action, reward, new_observation, done) in enumerate(mini_batch):
-        if not done:
+    for index, (observation, action, reward, new_observation, completed) in enumerate(mini_batch):
+        if not completed:
             max_future_q = reward + discount_factor * np.max(future_qs_list[index])
         else:
             max_future_q = reward
